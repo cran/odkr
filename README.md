@@ -1,12 +1,14 @@
-# odkr: Open Data Kit (ODK) R API
+# odkr: Open Data Kit (ODK) R API <img src="man/figures/odkr.png" align="right" />
 
-[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip)
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 [![CRAN](https://img.shields.io/cran/v/odkr.svg)](https://cran.r-project.org/package=odkr)
 [![CRAN](https://img.shields.io/cran/l/odkr.svg)](https://CRAN.R-project.org/package=odkr)
 [![CRAN](http://cranlogs.r-pkg.org/badges/odkr)](https://CRAN.R-project.org/package=odkr)
+[![CRAN](http://cranlogs.r-pkg.org/badges/grand-total/odkr)](https://CRAN.R-project.org/package=odkr)
 [![Travis](https://img.shields.io/travis/validmeasures/odkr.svg?branch=master)](https://travis-ci.org/validmeasures/odkr)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/validmeasures/odkr?branch=master&svg=true)](https://ci.appveyor.com/project/validmeasures/odkr)
 [![codecov](https://codecov.io/gh/validmeasures/odkr/branch/master/graph/badge.svg)](https://codecov.io/gh/validmeasures/odkr)
+[![DOI](https://zenodo.org/badge/118323284.svg)](https://zenodo.org/badge/latestdoi/118323284)
 
 **Open Data Kit (ODK)** is a free and open-source set of tools which help 
 organizations author, field, and manage mobile data collection solutions. ODK 
@@ -65,10 +67,19 @@ sudo R CMD javareconf JAVA_HOME=/usr/java/default
 ```
 
 ## Installation
+
+Install `odkr` from CRAN:
+
 ```R
-# Install development version of odkr by installing devtools and then installing
-# odkr package via git
-install.packages("devtools")
+install.packages("odkr")
+library(odkr)
+```
+
+Install development version of `odkr` by installing devtools and then installing
+`odkr` package via git
+
+```R
+# install.packages("devtools")
 devtools::install_github("validmeasures/odkr")
 library(odkr)
 ```

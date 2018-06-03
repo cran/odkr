@@ -1,4 +1,19 @@
-# odkr v0.1.3
+# odkr 0.2.0
+
+In this version, I have implemented changes to respond to package issues from
+[CRAN check results](https://cran.r-project.org/web/checks/check_results_odkr.html).
+
+* The `get_briefcase()` function, I changed the download url for ODK Briefcase to
+the permanent download url provided by the developers at https://github.com/opendatakit/briefcase.
+This now resolves the issue of apparent download of corrupt jar file.
+
+* All briefcase-releated functions now include a check on runtime of Java availability
+and Java version checking for a minimum Java version of Java 8. I followed the testing
+script specified by CRAN in the *Writing R Extensions* manual.
+
+
+# odkr 0.1.3
+
 In this version, I have implemented the following changes:
 
 * In the DESCRIPTION, all mention of Open Data Kit or ODK I have put in single quotes. In addition,
@@ -22,7 +37,8 @@ suggested to specify a test location for arguments needing directory path inputs
 specified syntax of no default write/save directories.
 
 
-# odkr v0.1.2
+# odkr 0.1.2
+
 * Resolve issue in testing specifically the test to check whether the function 
 `export_data()` produces the output `test.cscv`. Upon checking, logs show that 
 indeed `test.csv` is produced but the way the test is structured is that depending 
@@ -31,7 +47,8 @@ location. For this, I re-worked both the test call to the function to specify
 clearly where the output goes and then worked on the actual test to check in the
 correct directory for `test.csv`.
 
-# odkr v0.1.1
+# odkr 0.1.1
+
 * Resolve issues with how `download.file()` handles downloads under the Windows
 platform.
 
@@ -42,5 +59,6 @@ specified. This was fine for Linux and macOS as downloaded file worked according
 invalid or corrupted hence producing the errors noted on testing. Now, the
 `mode` argument has been set to `"wb"` in the `get_briefcase()` function.
 
-# odkr v0.1.0
-Iniial release of `odkr`
+# odkr 0.1.0
+
+Initial release of `odkr`

@@ -17,7 +17,7 @@
 #'     "ODK Briefcase vX.Y.Z Production.jar" where vX.Y.Z is the version number
 #' @param id Form ID of form to be pulled
 #' @param to Destination directory for pulled ODK forms
-#' @param from URL of remote ODK Aggregate server
+#' @param from URL of remote ODK Aggregate server to pull ODK forms data from
 #' @param username Username for account in remote ODK Aggregate server from
 #' which forms are to be pulled
 #' @param password Password for account in remote ODK Aggregate server from
@@ -40,31 +40,58 @@
 #'               username = "validtrial",
 #'               password = "zEF-STN-5ze-qom")
 #'   }
+#'
 #' @export
 #'
 #
 ################################################################################
 
 pull_remote <- function(target = "", briefcase = "odkBriefcase_latest",
-                        id, to = "", from = "", username, password) {
-
+                        id = "", to = "", from = "", username, password) {
+  #
+  # Check if appropriate Java runtime version is available
+  #
+  rJava::.jinit()
+  jv <- rJava::.jcall("java/lang/System", "S", "getProperty", "java.runtime.version")
+  if(substr(jv, 1L, 2L) == "1.") {
+    jvn <- as.numeric(paste0(strsplit(jv, "[.]")[[1L]][1:2], collapse = "."))
+    if(jvn < 1.8) stop("Java >= 8 is needed for this package but not available")
+  }
+  #
+  # Check if target is specified
+  #
   if(target == "") {
     stop("Cannot locate ODK Briefcase .jar file. Check target location of .jar file is correct.", call. = TRUE)
   }
-
+  #
+  # Check if id is specified
+  #
+  if(id == "") {
+    stop("Form id not specified. Try again.", call. = TRUE)
+  }
+  #
+  # Check if from is specified
+  #
   if(from == "") {
-    stop("Cannot locate remote ODK Aggregate server. Check target URL of remote ODK Aggregate server is correct.", call. = TRUE)
+    stop("URL of remote ODK Aggregate not specified. Try again.", call. = TRUE)
   }
-
+  #
+  # Check if to is specified
+  #
   if(to == "") {
-    stop("Cannot locate distination folder for ODK Briefcase Storage. Check destination location is correct.", call. = TRUE)
+    stop("Cannot locate destination folder for ODK Briefcase Storage. Check destination location is correct.", call. = TRUE)
   }
-
+  #
+  # Create command line inputs based on required specifications
+  #
   z <- paste("java -jar ", target, "/", briefcase, ".jar",
              " --form_id ", id,
              " --storage_directory ", to,
              " --aggregate_url ", from,
              " --odk_username ", username,
              " --odk_password ", password, sep = "")
+  #
+  # Execute inputs on command line
+  #
   system(z)
 }
